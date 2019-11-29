@@ -7,6 +7,9 @@ import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.bean.Dog;
 
+/**
+ * @author xu
+ */
 public class DemoApplication {
 
     public static void main(String[] args) {
