@@ -3,6 +3,7 @@ package xu.spring.ioc;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.bean.Dog;
 
@@ -23,7 +24,19 @@ public class DemoApplication {
 
         bean(applicationContext);
 
+        aopBean(applicationContext);
+
         applicationContext.stop();
+
+    }
+
+    private static void aopBean(ApplicationContext applicationContext){
+
+        MathCalculator mathCalculator = applicationContext.getBean(MathCalculator.class);
+
+        mathCalculator.div(2,1);
+        System.out.println("===============aopBean end========================");
+
 
     }
 

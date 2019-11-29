@@ -1,9 +1,8 @@
 package xu.spring.ioc;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
+import xu.spring.ioc.aop.LogAspects;
+import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.bean.ColorFactoryBean;
 import xu.spring.ioc.bean.Dog;
@@ -17,7 +16,8 @@ import xu.spring.ioc.importbean.MyImportSelector;
  */
 
 @Configuration
-@ComponentScan("xu.spring.ioc.beanpostprocessor")
+@ComponentScan({"xu.spring.ioc.beanpostprocessor", "xu.spring.ioc.aop"})
+@EnableAspectJAutoProxy
 @Import({Dog.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class})
 public class MainConfiguration {
 
@@ -29,6 +29,19 @@ public class MainConfiguration {
     @Bean
     public ColorFactoryBean colorFactoryBean() {
         return new ColorFactoryBean();
+    }
+
+
+    /*=========AOP===========*/
+
+    @Bean
+    public LogAspects logAspects() {
+        return new LogAspects();
+    }
+
+    @Bean
+    public MathCalculator mathCalculator() {
+        return new MathCalculator();
     }
 
 }

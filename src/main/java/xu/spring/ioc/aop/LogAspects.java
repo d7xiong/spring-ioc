@@ -12,7 +12,6 @@ import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * 切面类
- * @author lfy
  *
  * @Aspect： 告诉Spring当前类是一个切面类
  *
@@ -23,7 +22,7 @@ public class LogAspects {
 	//抽取公共的切入点表达式
 	//1、本类引用
 	//2、其他的切面引用
-	@Pointcut("execution(public int com.atguigu.aop.MathCalculator.*(..))")
+	@Pointcut("execution(public int xu.spring.ioc.aop.MathCalculator.*(..))")
 	public void pointCut(){};
 
 	//@Before在目标方法之前切入；切入点表达式（指定在哪个方法切入）
@@ -33,7 +32,7 @@ public class LogAspects {
 		System.out.println(""+joinPoint.getSignature().getName()+"运行。。。@Before:参数列表是：{"+Arrays.asList(args)+"}");
 	}
 
-	@After("com.atguigu.aop.LogAspects.pointCut()")
+	@After("xu.spring.ioc.aop.LogAspects.pointCut()")
 	public void logEnd(JoinPoint joinPoint){
 		System.out.println(""+joinPoint.getSignature().getName()+"结束。。。@After");
 	}
