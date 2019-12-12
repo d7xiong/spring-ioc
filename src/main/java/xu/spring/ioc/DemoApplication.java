@@ -49,9 +49,9 @@ public class DemoApplication {
         Object bean = applicationContext.getBean("colorFactoryBean");
 
         // 获取工厂bean本身,加一个&标识
-        Object beanFactory = applicationContext.getBean("&colorFactoryBean");
+        Object factoryBean = applicationContext.getBean("&colorFactoryBean");
         System.out.println("colorFactoryBean创建的bean:"+bean.getClass());
-        System.out.println("colorFactoryBean工厂bean:"+beanFactory.getClass());
+        System.out.println("colorFactoryBean工厂bean:"+factoryBean.getClass());
         System.out.println("===============factoryBean end========================");
 
     }
