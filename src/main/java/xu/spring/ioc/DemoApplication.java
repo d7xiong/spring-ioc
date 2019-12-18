@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
+import xu.spring.ioc.bean.Color;
 import xu.spring.ioc.bean.Dog;
 
 /**
@@ -51,6 +52,7 @@ public class DemoApplication {
         // 获取工厂bean本身,加一个&标识
         Object factoryBean = applicationContext.getBean("&colorFactoryBean");
         System.out.println("colorFactoryBean创建的bean:"+bean.getClass());
+        System.out.println("colorFactoryBean创建的bean内@Autowired注入的Dog失效,dog:"+((Color)bean).getDog());
         System.out.println("colorFactoryBean工厂bean:"+factoryBean.getClass());
         System.out.println("===============factoryBean end========================");
 
