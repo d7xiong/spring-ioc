@@ -49,7 +49,10 @@ public class DemoApplication {
         // 获取工厂bean创建的对象
         Object bean = applicationContext.getBean("colorFactoryBean");
 
-        // 获取工厂bean本身,加一个&标识
+        // 实现SmartFactoryBean再创建工厂对象时，直接把内置对象也创建出来
+        Object smartFactoryBean = applicationContext.getBean("&colorSmartFactoryBean");
+
+        // 获取工厂bean本身,加一个&标识。不会创建内置对象
         Object factoryBean = applicationContext.getBean("&colorFactoryBean");
         System.out.println("colorFactoryBean创建的bean:"+bean.getClass());
         System.out.println("colorFactoryBean创建的bean内@Autowired注入的Dog失效,dog:"+((Color)bean).getDog());
