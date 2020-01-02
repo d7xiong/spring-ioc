@@ -5,6 +5,7 @@ import xu.spring.ioc.aop.LogAspects;
 import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.bean.ColorFactoryBean;
+import xu.spring.ioc.bean.ColorSmartFactoryBean;
 import xu.spring.ioc.bean.Dog;
 import xu.spring.ioc.importbean.MyImportBeanDefinitionRegistrar;
 import xu.spring.ioc.importbean.MyImportSelector;
@@ -31,6 +32,10 @@ public class MainConfiguration {
         return new ColorFactoryBean();
     }
 
+    @Bean
+    public ColorSmartFactoryBean colorSmartFactoryBean(){
+        return new ColorSmartFactoryBean();
+    }
 
     /*=========AOP===========*/
 
