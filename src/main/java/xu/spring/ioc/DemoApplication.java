@@ -9,6 +9,8 @@ import xu.spring.ioc.bean.Color;
 import xu.spring.ioc.bean.Dog;
 import xu.spring.ioc.cglib.ProxyTest;
 
+import java.util.concurrent.*;
+
 /**
  * @author xu
  */
@@ -34,6 +36,21 @@ public class DemoApplication {
         applicationContext.stop();
 
         jdkAndCglibProxy();
+
+        lambda();
+
+    }
+
+
+    private static void lambda() {
+
+        ExecutorService singleThreadPool = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1024), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
+
+        singleThreadPool.execute(() -> System.out.println("I'm lambdaRunnable"));
+        singleThreadPool.shutdown();
+
 
     }
 
@@ -65,6 +82,7 @@ public class DemoApplication {
         System.out.println("colorFactoryBean创建的bean:" + bean.getClass());
         System.out.println("colorFactoryBean创建的bean内@Autowired注入的Dog失效,dog:" + ((Color) bean).getDog());
         System.out.println("colorFactoryBean工厂bean:" + factoryBean.getClass());
+        System.out.println("colorsmartFactoryBean工厂bean:" + smartFactoryBean);
         System.out.println("===============factoryBean end========================");
 
     }
