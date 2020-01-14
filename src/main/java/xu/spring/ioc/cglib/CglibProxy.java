@@ -13,7 +13,6 @@ import java.lang.reflect.Method;
  */
 public class CglibProxy implements MethodInterceptor {
 
-    private Object object;
     private Enhancer enhancer = new Enhancer();
 
     public Object getProxy(Class c){
@@ -24,8 +23,10 @@ public class CglibProxy implements MethodInterceptor {
 
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
 
-        methodProxy.invokeSuper(o, objects);
+        System.out.println("======前置通知======");
+        Object obj = methodProxy.invokeSuper(o, objects);
+        System.out.println("======后置通知======");
 
-        return null;
+        return obj;
     }
 }
