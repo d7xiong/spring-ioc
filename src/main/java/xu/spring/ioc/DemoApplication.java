@@ -7,6 +7,7 @@ import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.bean.Color;
 import xu.spring.ioc.bean.Dog;
+import xu.spring.ioc.cglib.ProxyTest;
 
 /**
  * @author xu
@@ -32,19 +33,26 @@ public class DemoApplication {
 
         applicationContext.stop();
 
+        jdkAndCglibProxy();
+
     }
 
-    private static void aopBean(ApplicationContext applicationContext){
+    private static void jdkAndCglibProxy() {
+        ProxyTest.cglibProxy();
+        ProxyTest.jdkProxy();
+    }
+
+    private static void aopBean(ApplicationContext applicationContext) {
 
         MathCalculator mathCalculator = applicationContext.getBean(MathCalculator.class);
 
-        mathCalculator.div(2,1);
+        mathCalculator.div(2, 1);
         System.out.println("===============aopBean end========================");
 
 
     }
 
-    private static void factoryBean(ApplicationContext applicationContext){
+    private static void factoryBean(ApplicationContext applicationContext) {
 
         // 获取工厂bean创建的对象
         Object bean = applicationContext.getBean("colorFactoryBean");
@@ -54,14 +62,14 @@ public class DemoApplication {
 
         // 获取工厂bean本身,加一个&标识。不会创建内置对象
         Object factoryBean = applicationContext.getBean("&colorFactoryBean");
-        System.out.println("colorFactoryBean创建的bean:"+bean.getClass());
-        System.out.println("colorFactoryBean创建的bean内@Autowired注入的Dog失效,dog:"+((Color)bean).getDog());
-        System.out.println("colorFactoryBean工厂bean:"+factoryBean.getClass());
+        System.out.println("colorFactoryBean创建的bean:" + bean.getClass());
+        System.out.println("colorFactoryBean创建的bean内@Autowired注入的Dog失效,dog:" + ((Color) bean).getDog());
+        System.out.println("colorFactoryBean工厂bean:" + factoryBean.getClass());
         System.out.println("===============factoryBean end========================");
 
     }
 
-    private static void bean(ApplicationContext applicationContext){
+    private static void bean(ApplicationContext applicationContext) {
         Car car = applicationContext.getBean(Car.class);
 
         car.go();

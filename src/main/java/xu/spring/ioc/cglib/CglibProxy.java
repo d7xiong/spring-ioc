@@ -23,9 +23,9 @@ public class CglibProxy implements MethodInterceptor {
 
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
 
-        System.out.println("======前置通知======");
+        System.out.println("======CglibProxy前置通知======");
         Object obj = methodProxy.invokeSuper(o, objects);
-        System.out.println("======后置通知======");
+        System.out.println("======CglibProxy后置通知======");
 
         return obj;
     }

@@ -1,5 +1,6 @@
 package xu.spring.ioc.cglib;
 
+import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.cglib.jdk.BuyTicket;
 import xu.spring.ioc.cglib.jdk.CommonPerson;
 import xu.spring.ioc.cglib.jdk.HuangNiu;
@@ -11,13 +12,18 @@ import java.lang.reflect.Proxy;
  * @date 2018/12/19 15:02
  * @description:
  */
-public class CglibTest {
+public class ProxyTest {
 
 
     public static void main(String[] args) {
-
+        cglibProxy();
         jdkProxy();
+    }
 
+    public static void cglibProxy() {
+        CglibProxy cglibProxy = new CglibProxy();
+        Car car = (Car) cglibProxy.getProxy(Car.class);
+        car.go();
     }
 
     public static void jdkProxy() {

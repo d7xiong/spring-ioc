@@ -7,6 +7,6 @@ package xu.spring.ioc.cglib.jdk;
  */
 public class CommonPerson implements BuyTicket {
     public void buyTicket() {
-        System.out.println("买到票了! ");
+        System.out.println("JDK实际代理类(买到票了!) ");
     }
 }

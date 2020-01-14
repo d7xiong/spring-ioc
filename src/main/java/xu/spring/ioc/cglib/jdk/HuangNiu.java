@@ -18,7 +18,7 @@ public class HuangNiu implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        System.out.println("HuangNiu: 黄牛帮忙代购");
+        System.out.println("JDK前置通知(黄牛帮忙代购)");
 
         Object obj = method.invoke(target, args);
 
