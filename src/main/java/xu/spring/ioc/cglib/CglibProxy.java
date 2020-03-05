@@ -3,6 +3,7 @@ package xu.spring.ioc.cglib;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
+import xu.spring.ioc.cglib.callback.MethodInterceptorCallback;
 
 import java.lang.reflect.Method;
 
@@ -11,22 +12,15 @@ import java.lang.reflect.Method;
  * @date 2018/12/19 14:46
  * @description:
  */
-public class CglibProxy implements MethodInterceptor {
+public class CglibProxy {
 
-    private Enhancer enhancer = new Enhancer();
 
-    public Object getProxy(Class c){
+    public Object getProxy(Class c) {
+        Enhancer enhancer = new Enhancer();
+        MethodInterceptor methodInterceptor = new MethodInterceptorCallback();
+
         enhancer.setSuperclass(c);
-        enhancer.setCallback(this);
+        enhancer.setCallback(methodInterceptor);
         return enhancer.create();
-    }
-
-    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-
-        System.out.println("======CglibProxy前置通知======");
-        Object obj = methodProxy.invokeSuper(o, objects);
-        System.out.println("======CglibProxy后置通知======");
-
-        return obj;
     }
 }
