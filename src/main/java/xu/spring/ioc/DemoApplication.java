@@ -9,6 +9,7 @@ import xu.spring.ioc.bean.Color;
 import xu.spring.ioc.bean.Dog;
 import xu.spring.ioc.cglib.ProxyTest;
 
+import java.nio.ByteBuffer;
 import java.util.concurrent.*;
 
 /**
@@ -39,8 +40,22 @@ public class DemoApplication {
 
         lambda();
 
+        byteBufferTest();
     }
 
+
+    /**
+     * 堆外内存
+     */
+
+
+    private static void byteBufferTest() {
+
+
+//        ByteBuffer b  = ByteBuffer.allocate(1024);
+
+
+    }
 
     private static void lambda() {
 
