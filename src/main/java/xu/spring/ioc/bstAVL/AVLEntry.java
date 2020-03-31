@@ -13,6 +13,7 @@ public class AVLEntry<K, V> implements Map.Entry<K, V> {
     V value;
     AVLEntry<K, V> left;
     AVLEntry<K, V> right;
+    int height = 1;
 
     public AVLEntry(K key, V value) {
         this.key = key;
@@ -59,6 +60,7 @@ public class AVLEntry<K, V> implements Map.Entry<K, V> {
         sb.append(", value=").append(value);
         sb.append(", left=").append(left == null ? "NULL" : left.getKey());
         sb.append(", right=").append(right == null ? "NULL" : right.getKey());
+        sb.append(", height=").append(height);
         sb.append('}');
         return sb.toString();
     }
