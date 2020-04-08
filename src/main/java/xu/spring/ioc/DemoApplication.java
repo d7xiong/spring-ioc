@@ -19,7 +19,11 @@ public class DemoApplication {
 
     public static void main(String[] args) {
 
+        myTest();
 
+    }
+
+    private static void myTest(){
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
         applicationContext.register(MainConfiguration.class);
