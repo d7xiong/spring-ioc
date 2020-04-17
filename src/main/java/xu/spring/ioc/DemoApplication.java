@@ -19,11 +19,11 @@ public class DemoApplication {
 
     public static void main(String[] args) {
 
-        myTest();
+        multiTurning();
 
     }
 
-    private static void myTest(){
+    private static void myTest() {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
         applicationContext.register(MainConfiguration.class);
@@ -59,6 +59,21 @@ public class DemoApplication {
 //        ByteBuffer b  = ByteBuffer.allocate(1024);
 
 
+    }
+
+    private static void multiTurning() {
+
+        Object obj1 = new Object();
+        Object obj2 = new Object();
+        Object obj3 = new Object();
+
+        Thread t1 = new Thread(new Lock(obj1, obj2));
+        Thread t2 = new Thread(new Lock(obj2, obj3));
+        Thread t3 = new Thread(new Lock(obj3, obj1));
+
+        t1.start();
+        t2.start();
+        t3.start();
     }
 
     private static void lambda() {
@@ -126,5 +141,36 @@ public class DemoApplication {
         }
 
         System.out.println("===============bean names end========================");
+    }
+
+
+    private static class Lock implements Runnable {
+
+        private Object current;
+        private Object next;
+
+        Lock(Object current, Object next) {
+            this.current = current;
+            this.next = next;
+        }
+
+        @Override
+        public void run() {
+
+            for (int i = 0; i < 10; i++) {
+                synchronized (next) {
+                    synchronized (current) {
+                        System.out.println(Thread.currentThread().getName());
+                        current.notifyAll();
+                    }
+                    try {
+                        next.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }
     }
 }
