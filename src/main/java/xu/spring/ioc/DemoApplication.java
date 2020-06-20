@@ -19,7 +19,7 @@ public class DemoApplication {
 
     public static void main(String[] args) {
 
-        multiTurning();
+        myTest();
 
     }
 
@@ -45,6 +45,8 @@ public class DemoApplication {
         lambda();
 
         byteBufferTest();
+
+        multiTurning();
     }
 
 
