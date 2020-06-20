@@ -3,13 +3,20 @@ package xu.spring.ioc;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.StringUtils;
 import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.bean.Color;
 import xu.spring.ioc.bean.Dog;
 import xu.spring.ioc.cglib.ProxyTest;
 
+import java.io.IOException;
+import java.net.URL;
 import java.nio.ByteBuffer;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -47,8 +54,33 @@ public class DemoApplication {
         byteBufferTest();
 
         multiTurning();
+
+        classLoaderResourceTest();
     }
 
+
+    private static void classLoaderResourceTest() {
+
+        String RESOURCE_LOCATION = "META-INF/spring.handlers";
+        Enumeration<URL> urls;
+        try {
+            urls = DemoApplication.class.getClassLoader().getResources(RESOURCE_LOCATION);
+
+            while (urls.hasMoreElements()) {
+                URL url = urls.nextElement();
+                UrlResource resource = new UrlResource(url);
+                Properties properties = PropertiesLoaderUtils.loadProperties(resource);
+                for (Map.Entry<?, ?> entry : properties.entrySet()) {
+
+                    System.out.println(entry.getKey() + "\t" + entry.getValue());
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * 堆外内存
