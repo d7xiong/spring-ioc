@@ -11,6 +11,7 @@ import xu.spring.ioc.aop.MathCalculator;
 import xu.spring.ioc.bean.Car;
 import xu.spring.ioc.bean.Color;
 import xu.spring.ioc.bean.Dog;
+import xu.spring.ioc.beandefinition.BeanDefinitionTest;
 import xu.spring.ioc.cglib.ProxyTest;
 
 import java.io.IOException;
@@ -26,7 +27,15 @@ public class DemoApplication {
 
     public static void main(String[] args) {
 
+        beanDefinitionTest();
         myTest();
+
+    }
+
+    private static void beanDefinitionTest() {
+
+        BeanDefinitionTest.scanBeanDefinitionTest();
+        BeanDefinitionTest.genericBeanDefinitionTest();
 
     }
 
